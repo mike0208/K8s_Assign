@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-1-deploy
+  labels:
+    app: pod-1-deploy
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: pod-1-deploy
+  template:
+    metadata:
+      labels:
+        app: pod-1-deploy
+    spec:
+      containers:
+        - name: pod-1-deploy
+          image: mike0802/docker_ass_hello_world
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "128Mi"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pod-1-deploy
+  name: pod-1-service
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: pod-1-deploy
+
