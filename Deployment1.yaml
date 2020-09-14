@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pod-1-deploy
-          image: mike0802/docker_ass_hello_world
+          image: mike0802/pod1
           ports:
             - containerPort: 80
           resources:
